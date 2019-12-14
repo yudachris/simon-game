@@ -8,9 +8,24 @@ var indexCounter = 0;
 
 var gameOver = true;
 
+var clickCounter = 1;
+
 $("html").on("keydown", function (e) {
 
     if (gameOver) {
+        gameOver = false;
+        nextSequence();
+    } else {
+        //do nothing
+    }
+
+});
+
+$("html").on("click", function (e) {
+
+    clickCounter++;
+    
+    if (gameOver ==  true && clickCounter == 2) {
         gameOver = false;
         nextSequence();
     } else {
@@ -50,8 +65,9 @@ function checkPattern(color, index) {
         indexCounter++;
     }
     else {
-        titleText.text("Game Over! Press Any Key to Restart");
+        titleText.text("Game Over! Press Any Key or Click to Restart");
         gameOver = true;
+        clickCounter = 0;
         indexCounter = 0;
         colourPattern = [];
         gameOverAnimation();
